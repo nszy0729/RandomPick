@@ -1,4 +1,3 @@
-https://discord.com/api/oauth2/authorize?client_id=1336239566817857536&permissions=0&scope=bot%20applications.commands
 # Random Pick
 Random Pickは配列からランダムでターゲットを選択してくれるDiscord Botです。
 
