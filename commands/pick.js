@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const _ = require('lodash');
+const util = require('./commandUtil.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,29 +14,14 @@ module.exports = {
 	execute: async function(interaction) {
     const targets = interaction.options.getString('targets').split(',');
     const pickCount = interaction.options.getInteger('pickcount');
-    // ターゲットとピック数が合っているか確認
-    if (pickCount === 0) {
-		  await interaction.reply('pickCountが0になっています。');
+    // スラッシュコマンドのオプションを検証する
+    const validateMessage = util.validateOptions(targets, pickCount);
+    if (validateMessage) {
+		  await interaction.reply(validateMessage);
       return;
     }
-    if (targets.length < pickCount) {
-		  await interaction.reply('targetsの数がpickcountより小さいです。');
-      return;
-    }
-    const picked = pickItems(targets, pickCount);
-    let replyMessage = '選ばれたのは\n・' + picked.join('\n・') + '\nです。';
-		await interaction.reply(replyMessage);
+    // 対象をランダムにピックして返す
+    const picked = util.pickItems(targets, pickCount);
+    await interaction.reply({ embeds: [util.generateReplyEmbed(targets, pickCount, picked)] });
 	},
 };
-
-function pickItems(targets, pickCount) {
-  let list = targets.concat();
-  const picked = [];
-  for (let i = pickCount; i > 0; i--) {
-    const max = list.length - 1;
-    const targetIndex = _.random(0, max);
-    picked.push(list[targetIndex]);
-    list = list.filter((t, i) => i !== targetIndex);
-  }
-  return picked;
-}
