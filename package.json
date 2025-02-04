@@ -1,0 +1,19 @@
+{
+  "name": "randompick",
+  "version": "1.0.0",
+  "description": "suzuki's discord bots",
+  "license": "ISC",
+  "author": "yuta suzuki",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deploy.js",
+    "depstart": "node deploy.js && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^14.17.3",
+    "lodash": "^4.17.21"
+  }
+}
