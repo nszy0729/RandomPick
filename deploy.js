@@ -1,7 +1,7 @@
 const { REST, Routes } = require('discord.js');
 const pickCommand = require('./commands/pick.js');
 const vcpickCommand = require('./commands/vcpick.js');
-const { applicationId, guildId, token } = require('./config.json');
+const { applicationId, guildId, token } = require('./config.js');
 
 // 登録コマンドを呼び出してリスト形式で登録
 //const commands = [pickCommand.data.toJSON(), vcpickCommand.data.toJSON()];

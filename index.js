@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+const { token } = require('./config.js');
 const pickCommand = require('./commands/pick.js');
 const vcpickCommand = require('./commands/vcpick.js');
 
