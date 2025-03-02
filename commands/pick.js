@@ -23,8 +23,6 @@ module.exports = {
       }
       // 対象をランダムにピックして返す
       const picked = util.pickItems(targets, pickCount);
-      const msg = await interaction.fetchReply();
-      console.log('reply time', msg.interaction);
       await interaction.reply({ embeds: [util.generateReplyEmbed(targets, pickCount, picked)] });
     } catch(e) {
       console.log('reply時にエラー', e);

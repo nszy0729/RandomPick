@@ -12,6 +12,15 @@ module.exports = {
     }
     return '';
   },
+  validateAssignOptions: function validateAssignOptions(targets, lanes) {
+    if (targets.length === 0 || lanes.length === 0) {
+      return 'targetsまたはlanesが0になっています。';
+    }
+    if (targets.length !== lanes.length) {
+      return 'targetsとlanesの数は同じ数にしてください。';
+    }
+    return '';
+  },
   pickItems: function pickItems(targets, pickCount) {
     let list = targets.concat();
     const picked = [];
@@ -31,6 +40,16 @@ module.exports = {
         { name: 'Targets', value: `${targets}`, inline: true },
         { name: 'Pick', value: `${pickcount}`, inline: true },
         { name: 'Result', value: '・' + picked.join('\n・') }
+      );
+  },
+  generateAssignReplyEmbed: function generateAssignReplyMessage(targets, lane, results) {
+    return new EmbedBuilder()
+      .setColor('Random')
+      .setAuthor({ name: 'Random Pick', iconURL: iconUrl, url: 'https://github.com/nszy0729/RandomPick' })
+      .addFields(
+        { name: 'Targets', value: `${targets}`, inline: true },
+        { name: 'Lane', value: `${lane}`, inline: true },
+        { name: 'Result', value: '・' + results.join('\n・') }
       );
   },
   generateReplyMessage: function generateReplyMessage(targets, pickcount, picked) {

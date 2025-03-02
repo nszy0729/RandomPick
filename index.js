@@ -2,6 +2,7 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.js');
 const pickCommand = require('./commands/pick.js');
 const vcpickCommand = require('./commands/vcpick.js');
+const assignCommand = require('./commands/assign.js');
 
 // Botの初期化
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -24,6 +25,10 @@ client.on(Events.InteractionCreate, async interaction => {
         }
         if (interaction.commandName === vcpickCommand.data.name) {
             await vcpickCommand.execute(interaction);
+            return;
+        }
+        if (interaction.commandName === assignCommand.data.name) {
+            await assignCommand.execute(interaction);
             return;
         }
         // 存在しないコマンドに対するエラー
