@@ -52,7 +52,13 @@ module.exports = {
         { name: 'Result', value: '・' + results.join('\n・') }
       );
   },
-  generateReplyMessage: function generateReplyMessage(targets, pickcount, picked) {
-    return `対象: ${targets}\n数: ${pickcount}\n\n選ばれたのは\n・${picked.join('\n・')}\nです。`;
+  // Fisher-Yatesシャッフル
+  shuffle: function shuffleFisherYates(array) {
+    const copy = array.concat();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
   }
 }

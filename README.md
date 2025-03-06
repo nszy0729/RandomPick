@@ -14,13 +14,19 @@ Render.comは放置していると勝手に寝るのでやめた。
 
 ### 登録の手順
 ローカルで起動したい場合は下記の手順で。
-1. 下記のリンクから導入先のサーバーにBotを追加する。
-    https://discord.com/api/oauth2/authorize?client_id=1336239566817857536&permissions=0&scope=bot%20applications.commands
-2. config.jsを作成する。
+1. 下記リンクからBotを作成します。
+    https://discord.com/developers/applications
+2. 作成したBotに下記の権限を付与します。（サイドメニュー「Bot」から付与可能。）
+    - Presence Intent
+    - Server Members Intent
+3. サーバーにBotを追加する。
+    https://discord.com/api/oauth2/authorize?client_id={BotのアプリケーションID}&permissions=0&scope=bot%20applications.commands
+4. ローカルでGitリポジトリをクローンし、npm iなどでライブラリをダウンロードする。
+5. config.jsを作成する。
     - token: Botのトークン。
     - applicationId: BotのアプリケーションID。
     - guildId: 導入先のサーバーID。開発者モードにして右クリ > 「サーバーIDをコピー」で取得可能。
-3. npm run depstart でコマンド登録 + サーバー起動。
+5. npm run depstart でコマンド登録 + サーバー起動。
 
 ## 参考
 https://www.geeklibrary.jp/counter-attack/discord-js-bot/#3discordjs%25e3%2581%25ae%25e3%2582%25a4%25e3%2583%25b3%25e3%2582%25b9%25e3%2583%2588%25e3%2583%25bc%25e3%2583%25ab

@@ -1,44 +1,58 @@
-const { SlashCommandBuilder } = require('discord.js');
-const util = require('./commandUtil.js');
-const _ = require('lodash');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const util = require('../util/commandUtil.js');
+const text = require('../util/text.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('assign')
-		.setDescription('対象のメンバーをランダムにレーンに割り当てます。')
-    .addStringOption((op) => op.setName('targets')
-      .setDescription('A group of target strings. Enter comma-separated strings.')
+		.setName(text.assign_command_name)
+		.setDescription(text.assign_description)
+    .addStringOption((op) => op.setName(text.assign_param1_name)
+      .setDescription(text.assign_param1_description)
       .setRequired(true))
-    .addStringOption((op) => op.setName('lanes')
-      .setDescription('A group of lane strings. Enter comma-separated strings.')
+    .addStringOption((op) => op.setName(text.assign_param2_name)
+      .setDescription(text.assign_param2_description)
       .setRequired(true)),
 	execute: async function(interaction) {
     try {
-      const targets = interaction.options.getString('targets').split(',');
-      const lanes = interaction.options.getString('lanes').split(',');
+      const targets = interaction.options.getString(text.assign_param1_name).split(',');
+      const lanesStr = interaction.options.getString(text.assign_param2_name);
+      const lanes = lanesStr.toLowerCase() === text.assign_param2_all_keyword ? ['top', 'jg', 'mid', 'bot', 'sup'] : lanesStr.split(',');
       // スラッシュコマンドのオプションを検証する
-      const validateMessage = util.validateAssignOptions(targets, lanes);
+      const validateMessage = validateOptions(targets, lanes);
       if (validateMessage) {
         await interaction.reply(validateMessage);
         return;
       }
       // 対象をランダムに割り当てて返す
       const result = laneAssign(targets, lanes);
-      await interaction.reply({ embeds: [util.generateAssignReplyEmbed(targets, lanes, result)] });
+      await interaction.reply({ embeds: [generateAssignReplyMessage(targets, lanes, result)] });
     } catch(e) {
-      console.log('reply時にエラー', e);
+      console.log(text.all_reply_error, e);
     }
 	},
 };
+function validateOptions(targets, lanes) {
+  if (targets.length === 0 || lanes.length === 0) {
+    return text.assign_error_empty_list;
+  }
+  if (targets.length !== lanes.length) {
+    return text.assign_error_not_equal;
+  }
+  return '';
+}
 
 function laneAssign(targets, lanes) {
-  let result = [];
-  let targetList = [...targets];
-  for (let i = 0; i < lanes.length; i++) {
-    // ランダムにレーンに割り当てる
-    const index = _.random(0, targetList.length-1);
-    result.push(`${lanes[i]}：${targetList[index]}`);
-    targetList = targetList.filter((row, i) => i !== index);
-  }
-  return result;
+  const shuffled = util.shuffle(targets);
+  return lanes.map((lane, i) => `${lane}：${shuffled[i]}`);
+}
+
+function generateAssignReplyMessage(targets, lane, results) {
+  return new EmbedBuilder()
+    .setColor('Random')
+    .setAuthor({ name: text.all_bot_name, iconURL: text.iconUrl, url: text.all_source_github_url })
+    .addFields(
+      { name: text.assign_param1_label, value: `${targets}`, inline: true },
+      { name: text.assign_param2_label, value: `${lane}`, inline: true },
+      { name: text.assign_result_label, value: '・' + results.join('\n・') }
+    );
 }
