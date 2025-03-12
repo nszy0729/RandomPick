@@ -14,7 +14,7 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildPresences,
 ]});
 client.once(Events.ClientReady, c => {
-	console.log(`${c.user.tag}が起動しました。`);
+    console.log(text.all_startup.replace('{0}', c.user.tag));
 });
 
 // スラッシュコマンドの設定

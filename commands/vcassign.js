@@ -16,7 +16,7 @@ module.exports = {
     try {
       const channel = interaction.options.getChannel(text.vcassign_param1_name);
       const lanesStr = interaction.options.getString(text.vcassign_param2_name);
-      const lanes = lanesStr.toLowerCase() === text.vcassign_param2_all_keyword ? ['top', 'jg', 'mid', 'bot', 'sup'] : lanesStr.split(',');
+      const lanes = lanesStr.toLowerCase() === text.vcassign_param2_all_keyword ? [text.all_top_label, text.all_jg_label, text.all_mid_label, text.all_bot_label, text.all_sup_label] : lanesStr.split(',');
       // スラッシュコマンドのオプションを検証する
       const validateMessage = validateOptions(channel, lanes);
       if (validateMessage) {

@@ -1,55 +1,115 @@
 // Bot内の各種テキストを管理する
+// 汎用的なテキスト
+const all_bot_name = 'Random Pick';
+const all_source_github_url = 'https://github.com/nszy0729/RandomPick';
+const all_icon_url = 'https://github.com/nszy0729/RandomPick/blob/master/image/BotIcon.png?raw=true';
+const all_reply_error = 'Reply Error';
+const all_command_notfound = '{0}というコマンドは存在しません。';
+const all_command_error = 'コマンド実行時にエラーになりました。';
+const all_startup = '{0}が起動しました。';
+const all_top_label = 'top';
+const all_jg_label = 'jg';
+const all_mid_label = 'mid';
+const all_bot_label = 'bot';
+const all_sup_label = 'sup';
+// pickコマンドのテキスト
+const pick_command_name = 'pick';
+const pick_param1_name = 'targets';
+const pick_param1_label = 'ターゲット';
+const pick_param1_description = '対象のメンバーの一覧。カンマ区切りで入力してください。例）user1;user2;user3;user4;user5';
+const pick_param2_name = 'pickcount';
+const pick_param2_label = 'ピックする人数';
+const pick_param2_description = 'ピックする人数';
+const pick_result_label = '結果';
+const pick_description = `${pick_param2_label}で指定した人数と対象の文字列をカンマ区切りで渡すとランダムで${pick_param2_label}人数分の文字列を返します。`;
+const pick_error_param2_zero = `${pick_param2_name}が0になっています。`;
+const pick_error_param_invalid = `${pick_param1_name}の数が${pick_param2_name}より小さいです。`;
+// assignコマンドのテキスト
+const assign_command_name = 'assign';
+const assign_command_label = 'Assign';
+const assign_description = '対象のメンバーをランダムにレーンに割り当てます。メンバーとレーンの数が一致していれば5つ以上のレーンを指定可能です。';
+const assign_param1_name = 'targets';
+const assign_param1_label = 'メンバー';
+const assign_param1_description = 'メンバーの一覧。カンマ区切りで入力してください。例）user1;user2;user3;user4;user5';
+const assign_param2_name = 'lanes';
+const assign_param2_label = 'レーン';
+const assign_param2_description = '割り振るレーンの一覧。カンマ区切りで入力してください。 例）top;js;mid;bot;sup;休憩 もしくは allで全レーン指定可能';
+const assign_param2_all_keyword = 'all';
+const assign_result_label = '結果';
+const assign_error_empty_list = `${assign_param1_name}または${assign_param2_name}が0になっています。`;
+const assign_error_not_equal = `${assign_param1_name}と${assign_param2_name}の数は同じ数にしてください。`;
+// vcassignコマンドのテキスト
+const vcassign_command_name = 'vcassign';
+const vcassign_command_label = 'VCAssign';
+const vcassign_description = '対象のVC参加者をランダムにレーンに割り当てます。メンバーとレーンの数が一致していれば5つ以上のレーンを指定可能です。';
+const vcassign_param1_name = 'channel';
+const vcassign_param1_label = 'チャンネル';
+const vcassign_param1_description = '対象のボイスチャンネル。';
+const vcassign_param2_name = 'lanes';
+const vcassign_param2_label = 'レーン';
+const vcassign_param2_description = '割り振るレーンの一覧。カンマ区切りで入力してください。 例）top;js;mid;bot;sup;休憩 もしくは allで全レーン指定可能';
+const vcassign_param2_all_keyword = 'all';
+const vcassign_member_label = 'VC参加者';
+const vcassign_result_label = '結果';
+const vcassign_error_not_vc = 'ボイスチャンネルを選択してください。';
+const vcassign_error_empty_list = `${vcassign_param2_name}が0になっています。`;
+const vcassign_error_not_equal = `${vcassign_member_label}と${vcassign_param2_name}の数は同じ数にしてください。`;
+// deploy時のテキスト
+const deploy_done = 'コマンドが登録されました';
+const deploy_error = 'コマンドの登録中にエラーが発生しました: ';
+
 module.exports = {
-  // 汎用的なテキスト
-  all_bot_name: 'Random Pick',
-  all_source_github_url: 'https://github.com/nszy0729/RandomPick',
-  all_icon_url: 'https://github.com/nszy0729/RandomPick/blob/master/image/BotIcon.png?raw=true',
-  all_reply_error: 'Reply Error',
-  all_command_notfound: '{0}というコマンドは存在しません。',
-  all_command_error: 'コマンド実行時にエラーになりました。',
-  // pickコマンドのテキスト
-  pick_command_name: 'pick',
-  pick_description: `${this.pick_param2_label}で指定した人数と対象の文字列をカンマ区切りで渡すとランダムで${this.pick_param2_label}人数分の文字列を返します。`,
-  pick_param1_name: 'targets',
-  pick_param1_label: 'ターゲット',
-  pick_param1_description: '対象のメンバーの一覧。カンマ区切りで入力してください。例）user1,user2,user3,user4,user5',
-  pick_param2_name: 'pickcount',
-  pick_param2_label: 'ピックする人数',
-  pick_param2_description: 'ピックする人数',
-  pick_result_label: '結果',
-  pick_error_param2_zero: `${this.pick_param2_name}が0になっています。`,
-  pick_error_param_invalid: `${this.pick_param1_name}の数が${this.pick_param2_name}より小さいです。`,
-  // assignコマンドのテキスト
-  assign_command_name: 'assign',
-  assign_command_label: 'Assign',
-  assign_description: '対象のメンバーをランダムにレーンに割り当てます。メンバーとレーンの数が一致していれば5つ以上のレーンを指定可能です。',
-  assign_param1_name: 'targets',
-  assign_param1_label: 'メンバー',
-  assign_param1_description: 'メンバーの一覧。カンマ区切りで入力してください。例）user1,user2,user3,user4,user5',
-  assign_param2_name: 'lanes',
-  assign_param2_label: 'レーン',
-  assign_param2_description: '割り振るレーンの一覧。カンマ区切りで入力してください。 例）top,js,mid,bot,sup,休憩 もしくは allで全レーン指定可能',
-  assign_param2_all_keyword: 'all',
-  assign_result_label: '結果',
-  assign_error_empty_list: `${this.assign_param1_name}または${this.assign_param2_name}が0になっています。`,
-  assign_error_not_equal: `${this.assign_param1_name}と${this.assign_param2_name}の数は同じ数にしてください。`,
-  // vcassignコマンドのテキスト
-  vcassign_command_name: 'vcassign',
-  vcassign_command_label: 'VCAssign',
-  vcassign_description: '対象のVC参加者をランダムにレーンに割り当てます。メンバーとレーンの数が一致していれば5つ以上のレーンを指定可能です。',
-  vcassign_param1_name: 'channel',
-  vcassign_param1_label: 'チャンネル',
-  vcassign_param1_description: '対象のボイスチャンネル。',
-  vcassign_param2_name: 'lanes',
-  vcassign_param2_label: 'レーン',
-  vcassign_param2_description: '割り振るレーンの一覧。カンマ区切りで入力してください。 例）top,js,mid,bot,sup,休憩 もしくは allで全レーン指定可能',
-  vcassign_param2_all_keyword: 'all',
-  vcassign_member_label: 'VC参加者',
-  vcassign_result_label: '結果',
-  vcassign_error_not_vc: 'ボイスチャンネルを選択してください。',
-  vcassign_error_empty_list: `${this.vcassign_param2_name}が0になっています。`,
-  vcassign_error_not_equal: `${this.vcassign_member_label}と${this.vcassign_param2_name}の数は同じ数にしてください。`,
-  // deploy時のテキスト
-  deploy_done: 'コマンドが登録されました',
-  deploy_error: 'コマンドの登録中にエラーが発生しました: ',
+  all_bot_name,
+  all_source_github_url,
+  all_icon_url,
+  all_reply_error,
+  all_command_notfound,
+  all_command_error,
+  all_startup,
+  all_top_label,
+  all_jg_label,
+  all_mid_label,
+  all_bot_label,
+  all_sup_label,
+  pick_command_name,
+  pick_description,
+  pick_param1_name,
+  pick_param1_label,
+  pick_param1_description,
+  pick_param2_name,
+  pick_param2_label,
+  pick_param2_description,
+  pick_result_label,
+  pick_error_param2_zero,
+  pick_error_param_invalid,
+  assign_command_name,
+  assign_command_label,
+  assign_description,
+  assign_param1_name,
+  assign_param1_label,
+  assign_param1_description,
+  assign_param2_name,
+  assign_param2_label,
+  assign_param2_description,
+  assign_param2_all_keyword,
+  assign_result_label,
+  assign_error_empty_list,
+  assign_error_not_equal,
+  vcassign_command_name,
+  vcassign_command_label,
+  vcassign_description,
+  vcassign_param1_name,
+  vcassign_param1_label,
+  vcassign_param1_description,
+  vcassign_param2_name,
+  vcassign_param2_label,
+  vcassign_param2_description,
+  vcassign_param2_all_keyword,
+  vcassign_member_label,
+  vcassign_result_label,
+  vcassign_error_not_vc,
+  vcassign_error_empty_list,
+  vcassign_error_not_equal,
+  deploy_done,
+  deploy_error,
 }
