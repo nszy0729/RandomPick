@@ -14,9 +14,11 @@ module.exports = {
       .setRequired(true)),
 	execute: async function(interaction) {
     try {
-      const targets = interaction.options.getString(text.assign_param1_name).split(',');
+      const targets = interaction.options.getString(text.assign_param1_name).split(text.all_delimiter);
       const lanesStr = interaction.options.getString(text.assign_param2_name);
-      const lanes = lanesStr.toLowerCase() === text.assign_param2_all_keyword ? [text.all_top_label, text.all_jg_label, text.all_mid_label, text.all_bot_label, text.all_sup_label] : lanesStr.split(',');
+      const lanes = lanesStr.toLowerCase() === text.assign_param2_all_keyword
+        ? [text.all_top_label, text.all_jg_label, text.all_mid_label, text.all_bot_label, text.all_sup_label]
+        : lanesStr.split(text.all_delimiter);
       // スラッシュコマンドのオプションを検証する
       const validateMessage = validateOptions(targets, lanes);
       if (validateMessage) {

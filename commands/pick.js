@@ -14,7 +14,7 @@ module.exports = {
       .setRequired(true)),
 	execute: async function(interaction) {
     try {
-      const targets = interaction.options.getString(text.pick_param1_name).split(',');
+      const targets = interaction.options.getString(text.pick_param1_name).split(text.all_delimiter);
       const pickCount = interaction.options.getInteger(text.pick_param2_name);
       // スラッシュコマンドのオプションを検証する
       const validateMessage = validateOptions(targets, pickCount);
