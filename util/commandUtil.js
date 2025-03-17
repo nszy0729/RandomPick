@@ -1,4 +1,10 @@
+const text = require('./text.js');
+
 module.exports = {
+  generateRoleList: function generateRoleList(allKeyword, role) {
+    const result = role.toLowerCase().replaceAll(allKeyword.toLowerCase(), text.all_all_role_list);
+    return result.split(text.all_delimiter);
+  },
   // Fisher-Yatesシャッフル
   shuffle: function shuffleFisherYates(array) {
     const copy = array.concat();

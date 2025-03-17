@@ -75,6 +75,7 @@ module.exports = {
   all_mid_label,
   all_bot_label,
   all_sup_label,
+  all_all_role_list,
   pick_command_name,
   pick_description,
   pick_param1_name,
