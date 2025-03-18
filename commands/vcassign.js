@@ -32,6 +32,7 @@ module.exports = {
     }
 	},
 };
+
 function validateOptions(channel, lanes) {
   if (!channel.isVoiceBased()) {
     return text.vcassign_error_not_vc;
@@ -45,10 +46,10 @@ function validateOptions(channel, lanes) {
   }
   return '';
 }
+
 function getMembers(channel) {
   return channel.members.map((v, k) => v.nickname || v.user.globalName);
 }
-
 
 function laneAssign(members, lanes) {
   const shuffled = util.shuffle(members);
@@ -60,7 +61,7 @@ function generateAssignReplyMessage(members, lane, results) {
     .setColor('Random')
     .setAuthor({ name: text.all_bot_name, iconURL: text.iconUrl, url: text.all_source_github_url })
     .addFields(
-      { name: text.vcassign_member_label, value: `${members}`, inline: true },
+      { name: text.vcassign_member_label, value: `${members.join(text.all_delimiter)}`, inline: true },
       { name: text.vcassign_param2_label, value: `${lane}`, inline: true },
       { name: text.vcassign_result_label, value: '・' + results.join('\n・') }
     );

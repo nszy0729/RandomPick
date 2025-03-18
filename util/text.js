@@ -56,6 +56,15 @@ const vcassign_description = `対象のVC参加者をランダムに${vcassign_p
 const vcassign_param2_description = `割り振る${vcassign_param2_label}の一覧。カンマ区切りで入力してください。 例）${all_all_role_list}${all_delimiter}休憩 もしくは allで全${vcassign_param2_label}指定可能`;
 const vcassign_error_empty_list = `${vcassign_param2_name}が0になっています。`;
 const vcassign_error_not_equal = `${vcassign_member_label}と${vcassign_param2_name}の数は同じ数にしてください。`;
+// vcmem_コマンドのテキスト
+const vcmem_command_name = 'vcmem';
+const vcmem_command_label = 'VCMem';
+const vcmem_param1_name = 'channel';
+const vcmem_param1_label = 'チャンネル';
+const vcmem_param1_description = '対象のボイスチャンネル。';
+const vcmem_member_label = 'VC参加者';
+const vcmem_error_not_vc = 'ボイスチャンネルを選択してください。';
+const vcmem_description = '対象のVC参加者をカンマ区切りで取得します。';
 // deploy時のテキスト
 const deploy_start = 'コマンドを登録します。';
 const deploy_done = 'コマンドが登録されました';
@@ -115,6 +124,14 @@ module.exports = {
   vcassign_error_not_vc,
   vcassign_error_empty_list,
   vcassign_error_not_equal,
+  vcmem_command_name,
+  vcmem_command_label,
+  vcmem_param1_name,
+  vcmem_param1_label,
+  vcmem_param1_description,
+  vcmem_member_label,
+  vcmem_error_not_vc,
+  vcmem_description,
   deploy_start,
   deploy_done,
   deploy_error,

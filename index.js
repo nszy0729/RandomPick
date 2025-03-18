@@ -3,6 +3,7 @@ const { token } = require('./config.js');
 const pickCommand = require('./commands/pick.js');
 const assignCommand = require('./commands/assign.js');
 const vcassignCommand = require('./commands/vcassign.js');
+const vcmemCommand = require('./commands/vcmem.js');
 const text = require('./util/text.js');
 
 // Botの初期化
@@ -30,12 +31,16 @@ client.on(Events.InteractionCreate, async interaction => {
             await pickCommand.execute(interaction);
             return;
         }
+        if (interaction.commandName === assignCommand.data.name) {
+            await assignCommand.execute(interaction);
+            return;
+        }
         if (interaction.commandName === vcassignCommand.data.name) {
             await vcassignCommand.execute(interaction);
             return;
         }
-        if (interaction.commandName === assignCommand.data.name) {
-            await assignCommand.execute(interaction);
+        if (interaction.commandName === vcmemCommand.data.name) {
+            await vcmemCommand.execute(interaction);
             return;
         }
         // 存在しないコマンドに対するエラー

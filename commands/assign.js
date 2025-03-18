@@ -31,6 +31,7 @@ module.exports = {
     }
 	},
 };
+
 function validateOptions(targets, lanes) {
   if (targets.length === 0 || lanes.length === 0) {
     return text.assign_error_empty_list;

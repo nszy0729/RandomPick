@@ -1,12 +1,13 @@
 const { REST, Routes } = require('discord.js');
 const pickCommand = require('./commands/pick.js');
-const vcassignCommand = require('./commands/vcassign.js');
 const assignCommand = require('./commands/assign.js');
+const vcassignCommand = require('./commands/vcassign.js');
+const vcmemCommand = require('./commands/vcmem.js');
 const { applicationId, guilds, token } = require('./config.js');
 const text = require('./util/text.js');
 
 // 登録コマンドを呼び出してリスト形式で登録
-const commands = [pickCommand.data.toJSON(), assignCommand.data.toJSON(), vcassignCommand.data.toJSON()];
+const commands = [pickCommand.data.toJSON(), assignCommand.data.toJSON(), vcassignCommand.data.toJSON(), vcmemCommand.data.toJSON()];
 
 // DiscordのAPIには現在最新のversion10を指定
 const rest = new REST({ version: '10' }).setToken(token);
