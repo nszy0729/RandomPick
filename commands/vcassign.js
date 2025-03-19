@@ -52,8 +52,8 @@ function getMembers(channel) {
 }
 
 function laneAssign(members, lanes) {
-  const shuffled = util.shuffle(members);
-  return lanes.map((lane, i) => `${lane}：${shuffled[i]}`);
+  const assigned = util.assign(members, lanes);
+  return assigned.map((row) => `${row.role}：${row.player}`);
 }
 
 function generateAssignReplyMessage(members, lane, results) {

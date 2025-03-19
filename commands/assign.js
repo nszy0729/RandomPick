@@ -43,8 +43,8 @@ function validateOptions(targets, lanes) {
 }
 
 function laneAssign(targets, lanes) {
-  const shuffled = util.shuffle(targets);
-  return lanes.map((lane, i) => `${lane}：${shuffled[i]}`);
+  const assigned = util.assign(targets, lanes);
+  return assigned.map((row) => `${row.role}：${row.player}`);
 }
 
 function generateAssignReplyMessage(targets, lane, results) {
