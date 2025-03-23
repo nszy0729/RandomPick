@@ -33,7 +33,7 @@ function validateOptions(channel) {
   return '';
 }
 function getMembers(channel) {
-  return channel.members.map((v, k) => v.nickname || v.user.globalName);
+  return channel.members.map((v, k) => v.nickname || v.user.globalName || v.user.username);
 }
 
 function generateReplyMessage(members) {

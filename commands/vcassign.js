@@ -48,7 +48,7 @@ function validateOptions(channel, lanes) {
 }
 
 function getMembers(channel) {
-  return channel.members.map((v, k) => v.nickname || v.user.globalName);
+  return channel.members.map((v, k) => v.nickname || v.user.globalName || v.user.username);
 }
 
 function laneAssign(members, lanes) {
