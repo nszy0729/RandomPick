@@ -28,13 +28,13 @@ const assign = (member, role) => {
   result.push(assigned.filter((row) => row.role === text.all_mid_label)[0]);
   result.push(assigned.filter((row) => row.role === text.all_bot_label)[0]);
   result.push(assigned.filter((row) => row.role === text.all_sup_label)[0]);
-  result.concat(assigned.filter((row) => row.role !== text.all_top_label
+  return result.concat(assigned.filter((row) => row.role !== text.all_top_label
     && row.role !== text.all_jg_label
     && row.role !== text.all_mid_label
     && row.role !== text.all_bot_label
     && row.role !== text.all_sup_label
+    && row
   ));
-  return result.filter((row) => row);
 };
 module.exports = {
   generateRoleList,
