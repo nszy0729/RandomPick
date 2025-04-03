@@ -33,8 +33,7 @@ const assign = (member, role) => {
     && row.role !== text.all_mid_label
     && row.role !== text.all_bot_label
     && row.role !== text.all_sup_label
-    && row
-  ));
+  )).filter((row) => !!row);
 };
 module.exports = {
   generateRoleList,
